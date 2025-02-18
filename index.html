@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Weight Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      /* Luminescent changing background colors */
+      animation: backgroundAnimation 10s ease infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    @keyframes backgroundAnimation {
+      0% { background-color: #ff5f6d; }
+      25% { background-color: #ffc371; }
+      50% { background-color: #47c0e2; }
+      75% { background-color: #8e44ad; }
+      100% { background-color: #ff5f6d; }
+    }
+    .converter-container {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    input, select, button {
+      padding: 10px;
+      font-size: 1em;
+      margin: 5px;
+    }
+    .info {
+      background: rgba(0,0,0,0.5);
+      padding: 15px;
+      border-radius: 8px;
+      max-width: 400px;
+      margin: 0 auto;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="converter-container">
+    <h1>Weight Converter</h1>
+    <!-- Input field for weight -->
+    <input type="number" id="weightInput" placeholder="Enter weight" step="any">
+    <!-- Dropdown to choose the unit -->
+    <select id="unitSelect">
+      <option value="kg">Kilograms (kg)</option>
+      <option value="lbs">Pounds (lbs)</option>
+    </select>
+    <!-- Button to perform conversion -->
+    <button onclick="convertWeight()">Convert</button>
+    <!-- Area to display the conversion result -->
+    <h2 id="result"></h2>
+  </div>
+  
+  <!-- Section explaining the inputs -->
+  <div class="info">
+    <h3>Input Information</h3>
+    <p>
+      <strong>Weight Input:</strong> Enter any numerical value, which can be whole or decimal.
+      <br>
+      <strong>Unit Selection:</strong> Choose whether the entered weight is in Kilograms (kg) or Pounds (lbs).
+      <br>
+      <strong>Conversion:</strong> If you select Kilograms, the weight will be converted to Pounds, and vice versa.
+    </p>
+  </div>
+
+  <script>
+    function convertWeight() {
+      var weight = parseFloat(document.getElementById("weightInput").value);
+      var unit = document.getElementById("unitSelect").value;
+      var result = document.getElementById("result");
+      
+      if (isNaN(weight)) {
+        result.innerHTML = "Please enter a valid number.";
+        return;
+      }
+      
+      if (unit === "kg") {
+        // 1 kg ≈ 2.20462 lbs
+        var lbs = weight * 2.20462;
+        result.innerHTML = weight + " kg is " + lbs.toFixed(2) + " lbs";
+      } else if (unit === "lbs") {
+        // 1 lb ≈ 0.453592 kg
+        var kg = weight * 0.453592;
+        result.innerHTML = weight + " lbs is " + kg.toFixed(2) + " kg";
+      }
+    }
+  </script>
+</body>
+</html>
